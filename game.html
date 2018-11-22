@@ -41,7 +41,7 @@
 
             draw() {
                 textAlign(CENTER, CENTER);
-                fill(0);
+                fill(255);
                 textSize(50);
                 text(`${floor(this.points)} (${this.speed.toFixed(2)})`, width * 0.5, height * 0.125);
 
@@ -84,6 +84,10 @@
             const dy = abs(mouseY - game.centerY);
             const dist = sqrt(dx ** 2 + dy ** 2);
             if (dist <= game.btnRadius) game.click();
+        }
+
+        function mouseReleased() {
+            game.hovered = false;
         }
 
         function draw() {
