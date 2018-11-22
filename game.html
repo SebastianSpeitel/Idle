@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+    <title>Idle - Gameview</title>
+    <script>
+
+        class Game {
+            constructor(opt = {}) {
+                this.points = opt.points || 0;
+                this.level = opt.level || 0;
+
+                this.update();
+
+                setInterval(() => this.points += this.speed * 0.01, 10);
+            }
+
+            update() {
+                this.btnRadius = min(width, height) * 0.25;
+                this.centerX = width * 0.5;
+                this.centerY = height * 0.5;
+            }
+
+            get cost() {
+                return ceil(this.level ** 2);
+            }
+
+            get speed() {
+                return this.level;
+            }
+
+            upgrade() {
+                this.points -= this.cost;
+                this.level++;
+            }
+
+            click() {
+                if (this.points >= this.cost) this.upgrade();
+            }
+
+            draw() {
+                textAlign(CENTER, CENTER);
+                fill(0);
+                textSize(50);
+                text(`${floor(this.points)} (${this.speed.toFixed(2)})`, width * 0.5, height * 0.125);
+
+
+                fill(game.hovered ? 200 : 255);
+                ellipse(this.centerX, this.centerY, this.btnRadius * 2, this.btnRadius * 2);
+                fill(0);
+                text(this.cost, this.centerX, this.centerY);
+            }
+
+
+        }
+
+        let game;
+
+        function preload() {
+            game = new Game();
+        }
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight, P2D);
+            game.update();
+
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+            game.update();
+        }
+
+        function mouseMoved() {
+            const dx = abs(mouseX - game.centerX);
+            const dy = abs(mouseY - game.centerY);
+            const dist = sqrt(dx ** 2 + dy ** 2);
+            game.hovered = dist <= game.btnRadius;
+        }
+
+        function mousePressed() {
+            const dx = abs(mouseX - game.centerX);
+            const dy = abs(mouseY - game.centerY);
+            const dist = sqrt(dx ** 2 + dy ** 2);
+            if (dist <= game.btnRadius) game.click();
+        }
+
+        function draw() {
+            background(51);
+            game.draw();
+        }
+
+    </script>
+</head>
+<body style="display:flex;margin:0">
+</body>
+</html>
