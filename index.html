@@ -4,8 +4,14 @@
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
     <title>Idle</title>
+    <meta name="theme-color" content="#fff">
+    <meta name="description" content="Webcam app for HSF">
+    <meta name="keywords" content="webcam cam hsf radio">
+    <meta name="author" content="Sebastian">
     <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+    <link rel="manifest" href="manifest.json">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
         {
@@ -98,5 +104,7 @@
     <amp-iframe src="game.html" sandbox="allow-scripts" layout="fill">
         <div placeholder></div>
     </amp-iframe>
+    <amp-install-serviceworker src="./sw.js" data-iframe-src="https://sebastianspeitel.github.io/Idle/index.html" layout="nodisplay">
+    </amp-install-serviceworker>
 </body>
 </html>
