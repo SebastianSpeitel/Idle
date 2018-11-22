@@ -3,7 +3,7 @@
   "description": "Simplest possible idle game",
   "dir": "ltr",
   "display": "standalone",
-  "_icons": [
+  "icons": [
     {
       "src": "icons/icon_x25.png",
       "sizes": "25x25",
